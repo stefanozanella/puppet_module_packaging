@@ -2,7 +2,7 @@ require 'rake/testtask'
 require 'rubygems/tasks'
 
 namespace :test do
-  suites = [:end_to_end, :unit]
+  suites = [:end_to_end, :unit, :integration]
 
   desc "Run all test suites"
   task :all => suites

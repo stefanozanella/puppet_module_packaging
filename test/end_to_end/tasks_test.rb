@@ -1,10 +1,14 @@
 require 'test_helper'
 
 describe 'using PuppetModule::Pkg::Tasks in a Rakefile' do
+  around do |t|
+    do_into_dir(fixture_module('testmod'), t)
+  end
+
   let(:fixture_module) { File.join(fixture_dir, 'testmod') }
-  let(:fixture_rakefile) { File.join(fixture_module, 'Rakefile') }
+
   it 'defines a `install` task' do
-    task_list = `rake -f #{fixture_rakefile} -T`
+    task_list = `rake -T`
     task_list.must_match /^rake install/
   end
 end

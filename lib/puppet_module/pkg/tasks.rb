@@ -1,11 +1,13 @@
-require 'rake/tasklib'
+require 'puppet_module/pkg/tasks/rake_tasks'
+require 'puppet_module/pkg/tasks/install'
+require 'puppet_module/pkg/tasks/fs_driver'
+require 'puppet_module/pkg/tasks/modulefile'
 
 module PuppetModule
   module Pkg
-    class Tasks < Rake::TaskLib
+    class Tasks
       def initialize
-        desc "Install the module in a local temp dir"
-        task :install
+        RakeTasks.new(Modulefile.parse("Modulefile"))
       end
     end
   end
