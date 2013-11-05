@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'puppet_module_packaging/version'
+require 'puppet_module/pkg/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "puppet_module_packaging"
-  spec.version       = PuppetModulePackaging::VERSION
+  spec.name          = "puppetmodule-pkg-tasks"
+  spec.version       = PuppetModule::Pkg::VERSION
   spec.authors       = ["Stefano Zanella"]
   spec.email         = ["zanella.stefano@gmail.com"]
   spec.summary       = %q{Rake tasks for packaging Puppet modules}
