@@ -4,6 +4,8 @@ require 'minitest/filesystem'
 require 'minitest/around/spec'
 require 'mocha/setup'
 
+require 'tmpdir'
+
 require 'puppet_module/pkg/tasks'
 
 def fixture_dir
@@ -30,6 +32,13 @@ def do_into_tmpdir(t)
   Dir.mktmpdir do |dir|
     do_into_dir(dir, t)
   end
+end
+
+def do_into_tmp_module(mod_name, t)
+  do_into_tmpdir(proc {
+    FileUtils.cp_r fixture_module(mod_name), mod_name
+    do_into_dir(mod_name, t)
+  })
 end
 
 def directory?(d)

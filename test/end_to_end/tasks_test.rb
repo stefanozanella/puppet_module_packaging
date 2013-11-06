@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe 'using PuppetModule::Pkg::Tasks in a Rakefile' do
   around do |t|
-    do_into_dir(fixture_module('testmod'), t)
+    do_into_tmp_module('testmod', t)
   end
 
   let(:fixture_module) { File.join(fixture_dir, 'testmod') }

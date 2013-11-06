@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe 'install task' do
   around do |t|
-    do_into_dir(fixture_module('testmod'), t)
+    do_into_tmp_module('testmod', t)
   end
 
   describe 'by default' do
