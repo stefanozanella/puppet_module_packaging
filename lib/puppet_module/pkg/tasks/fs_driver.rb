@@ -11,6 +11,10 @@ module PuppetModule
 
           FileUtils.cp_r sanitized_src, dest
         end
+
+        def rm(path)
+          FileUtils.rm_rf path
+        end
       end
     end
   end

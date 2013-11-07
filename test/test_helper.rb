@@ -58,7 +58,7 @@ def file?(f)
 end
 
 def mkdir(d)
-  FileUtils.mkdir d
+  FileUtils.mkdir_p d
 end
 
 def touch(f)

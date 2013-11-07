@@ -39,4 +39,13 @@ describe PuppetModule::Pkg::Tasks::FSDriver do
       end
     end
   end
+
+  describe 'rm' do
+    it 'removes the whole subtree under given directory' do
+      mkdir 'a/b/c/d'
+
+      fs.rm 'a'
+      refute directory?('a'), "expected directory 'a' to have been wiped"
+    end
+  end
 end

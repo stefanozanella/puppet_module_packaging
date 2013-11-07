@@ -6,7 +6,7 @@ describe PuppetModule::Pkg::Tasks::Install do
   let(:fs)           { stub_everything }
   let(:out_dir)      { 'build' }
   let(:dest_path)    { "usr/share/puppet/modules/#{mod_name}" }
-  let(:install_path) { File.join(out_dir, dest_path) }
+  let(:install_path) { join(out_dir, dest_path) }
 
   it 'creates the output folder' do
     fs.expects(:mkdir).with(regexp_matches(/#{out_dir}/))
