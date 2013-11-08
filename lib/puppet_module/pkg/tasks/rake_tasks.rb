@@ -12,7 +12,7 @@ module PuppetModule
           install_dir = 'build'
 
           desc "Install the module in a local temp dir"
-          task :install do
+          task :install => :clean do
             Install.new(fs).invoke(mod_info.name, install_dir)
           end
 
