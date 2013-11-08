@@ -1,13 +1,13 @@
 require 'test_helper'
 
 describe PuppetModule::Pkg::Tasks::Clean do
-  let(:out_dir)    { 'clean_test' }
   let(:clean_task) { PuppetModule::Pkg::Tasks::Clean }
-  let(:fs)         { stub_everything }
+  let(:sys)        { stub_everything }
+  let(:opts)       { OpenStruct.new(:install_dir => 'clean_test')}
 
   it 'removes the installation directory' do
-    fs.expects(:rm).with(regexp_matches(/#{out_dir}/))
+    sys.expects(:rm).with(regexp_matches(/#{opts.install_dir}/))
 
-    clean_task.new(fs).invoke(out_dir)
+    clean_task.new(sys).invoke(nil, opts)
   end
 end

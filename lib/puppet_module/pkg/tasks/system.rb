@@ -1,7 +1,7 @@
 module PuppetModule
   module Pkg
     class Tasks
-      class FSDriver
+      class System
         def mkdir(path)
           FileUtils.mkdir_p path
         end
@@ -14,6 +14,10 @@ module PuppetModule
 
         def rm(path)
           FileUtils.rm_rf path
+        end
+
+        def sh(cmd)
+          `#{cmd}`
         end
       end
     end

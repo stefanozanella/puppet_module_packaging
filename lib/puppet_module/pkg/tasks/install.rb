@@ -2,16 +2,16 @@ module PuppetModule
   module Pkg
     class Tasks
       class Install
-        def initialize(filesystem)
-          @fs = filesystem
+        def initialize(system)
+          @sys = system
         end
 
-        def invoke(mod_name, out_dir)
-          @mod_name = mod_name
-          @out_dir = out_dir
+        def invoke(mod, opts)
+          @mod_name = mod.name
+          @out_dir = opts.install_dir
 
-          @fs.mkdir install_path
-          @fs.cp assets_to_install, install_path
+          @sys.mkdir install_path
+          @sys.cp assets_to_install, install_path
         end
 
         private

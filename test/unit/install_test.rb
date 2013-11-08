@@ -2,26 +2,26 @@ require 'test_helper'
 
 describe PuppetModule::Pkg::Tasks::Install do
   let(:install_task) { PuppetModule::Pkg::Tasks::Install }
-  let(:mod_name)     { 'my_module' }
-  let(:fs)           { stub_everything }
-  let(:out_dir)      { 'build' }
-  let(:dest_path)    { "usr/share/puppet/modules/#{mod_name}" }
-  let(:install_path) { join(out_dir, dest_path) }
+  let(:sys)          { stub_everything }
+  let(:mod)          { OpenStruct.new(:name => 'my_mod')}
+  let(:opts)         { OpenStruct.new(:install_dir => 'build')}
+  let(:dest_path)    { "usr/share/puppet/modules/#{mod.name}" }
+  let(:install_path) { join(opts.install_dir, dest_path) }
 
   it 'creates the output folder' do
-    fs.expects(:mkdir).with(regexp_matches(/#{out_dir}/))
+    sys.expects(:mkdir).with(regexp_matches(/#{opts.install_dir}/))
 
-    install_task.new(fs).invoke(mod_name, out_dir)
+    install_task.new(sys).invoke(mod, opts)
   end
 
   it 'creates the destination path into the output folder' do
-    fs.expects(:mkdir).with(regexp_matches(/#{dest_path}/))
+    sys.expects(:mkdir).with(regexp_matches(/#{dest_path}/))
 
-    install_task.new(fs).invoke(mod_name, out_dir)
+    install_task.new(sys).invoke(mod, opts)
   end
 
   it 'installs all the relevant directories into the output folder' do
-    fs.expects(:cp).with(
+    sys.expects(:cp).with(
       includes(
         'manifests',
         'templates',
@@ -29,6 +29,6 @@ describe PuppetModule::Pkg::Tasks::Install do
         'lib'),
       install_path)
 
-    install_task.new(fs).invoke(mod_name, out_dir)
+    install_task.new(sys).invoke(mod, opts)
   end
 end

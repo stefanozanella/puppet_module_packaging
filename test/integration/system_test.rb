@@ -1,8 +1,8 @@
 require 'test_helper'
 require 'tmpdir'
 
-describe PuppetModule::Pkg::Tasks::FSDriver do
-  let(:fs) { PuppetModule::Pkg::Tasks::FSDriver.new }
+describe PuppetModule::Pkg::Tasks::System do
+  let(:fs) { PuppetModule::Pkg::Tasks::System.new }
 
   around do |t|
     do_into_tmpdir(t)
@@ -46,6 +46,14 @@ describe PuppetModule::Pkg::Tasks::FSDriver do
 
       fs.rm 'a'
       refute directory?('a'), "expected directory 'a' to have been wiped"
+    end
+  end
+
+  describe 'exec' do
+    it 'executes given command in system`s shell' do
+      fs.sh 'touch test_file'
+
+      assert file?('test_file'), "expected file test_file to have been created, but it was not"
     end
   end
 end

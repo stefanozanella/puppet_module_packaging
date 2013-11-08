@@ -2,12 +2,12 @@ module PuppetModule
   module Pkg
     class Tasks
       class Clean
-        def initialize(filesystem)
-          @fs = filesystem
+        def initialize(system)
+          @sys = system
         end
 
-        def invoke(out_dir)
-          @fs.rm out_dir
+        def invoke(mod, opts)
+          @sys.rm opts.install_dir
         end
       end
     end

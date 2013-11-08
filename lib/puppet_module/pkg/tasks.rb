@@ -1,6 +1,5 @@
 require 'puppet_module/pkg/tasks/rake_tasks'
 
-require 'puppet_module/pkg/tasks/fs_driver'
 require 'puppet_module/pkg/tasks/modulefile'
 
 module PuppetModule
