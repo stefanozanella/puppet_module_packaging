@@ -49,6 +49,21 @@ def do_into_tmp_module(mod_name, t)
   })
 end
 
+# FPM requires rpmbuild to be present in order to produce a RPM package.
+# If we can't find it, do not run given test
+def only_if_rpmbuild_found(t)
+  if rpmbuild_found?
+    return t
+  else
+    return Proc.new {}
+  end
+end
+
+def rpmbuild_found?
+  `which rpmbuild`
+  return $? == 0
+end
+
 def directory?(d)
   File.directory? d
 end

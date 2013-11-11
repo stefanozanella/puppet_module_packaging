@@ -1,6 +1,7 @@
 *.swp
 *.swo
 .bundle
+.vagrant
 Gemfile.lock
 vendor
 **/pkg

@@ -2,6 +2,7 @@ require 'rake/tasklib'
 
 require 'puppet_module/pkg/tasks/system'
 require 'puppet_module/pkg/tasks/deb'
+require 'puppet_module/pkg/tasks/rpm'
 require 'puppet_module/pkg/tasks/install'
 require 'puppet_module/pkg/tasks/clean'
 
@@ -28,6 +29,11 @@ module PuppetModule
           desc "Wraps the module into a Debian package"
           task :deb => :install do
             Deb.new(sys).invoke(mod_info, options)
+          end
+
+          desc "Wraps the module into a RPM package"
+          task :rpm => :install do
+            RPM.new(sys).invoke(mod_info, options)
           end
         end
       end

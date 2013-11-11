@@ -8,7 +8,7 @@ describe 'using PuppetModule::Pkg::Tasks in a Rakefile' do
   let(:fixture_module) { File.join(fixture_dir, 'testmod') }
   let(:task_list) { `rake -T` }
 
-  [:install, :clean].each do |task|
+  [:install, :clean, :deb, :rpm].each do |task|
     it "defines a `#{task}` task" do
       task_list.must_match /^rake #{task}/
     end
