@@ -4,7 +4,7 @@ Provides Rake tasks to ease shipping of Puppet modules as proper system
 packages.
 
 Currently, it provides tasks to build Debian and RPM packages. To do that, it
-uses excellent Jordan Sissel's (https://github.com/jordansissel/fpm)[fpm].
+uses excellent Jordan Sissel's [fpm](https://github.com/jordansissel/fpm).
 
 **NOTE**: at this stage, this library lacks a bunch of useful features
 (particularly, its behavior can't be customized in any way and dependency
@@ -45,7 +45,7 @@ The package will be output into the `pkg` folder; you can see the packaged
 content into the `build` folder. _Package name_ will respect the following
 format:
 
-  puppet-mod-<author>-<module_name>
+    puppet-mod-<author>-<module_name>
 
 The information needed to build the package are carved out from the
 `Modulefile`. In particular, there must be a `name` and a `version` field; the
@@ -81,8 +81,8 @@ found on the system. To ease development, a `Vagrantfile` is provided, complete
 with a Puppet manifest to configure the testing host. If you wish to run all
 the tests without installing `rpmbuild`, you can just do the following:
 
-  vagrant up
-  vagrant ssh
-  cd /vagrant
-  bundle install --path vendor/bundle
-  bundle exec rake test:all
+    vagrant up
+    vagrant ssh
+    cd /vagrant
+    bundle install --path vendor/bundle
+    bundle exec rake test:all
