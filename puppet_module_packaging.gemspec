@@ -8,7 +8,7 @@ require 'puppet_module/pkg/version'
 signing_key_file = ENV['RUBYGEMS_SIGNING_KEY_FILE']
 
 Gem::Specification.new do |spec|
-  spec.name          = "puppetmodule-pkg-tasks"
+  spec.name          = "puppet_module_packaging"
   spec.version       = PuppetModule::Pkg::VERSION
   spec.authors       = ["Stefano Zanella"]
   spec.email         = ["zanella.stefano@gmail.com"]
