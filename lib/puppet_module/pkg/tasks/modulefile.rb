@@ -16,6 +16,12 @@ module PuppetModule
           validate_required_fields
         end
 
+        def method_missing(*args)
+          # TODO: Maybe display an info message about the
+          # unrecognized/unsupported field? (it might be a typo, so the user
+          # might be happy to know what have been ignored)
+        end
+
         private
 
         def name(s)
@@ -24,6 +30,30 @@ module PuppetModule
 
         def version(s)
           @metadata.version = s
+        end
+
+        def source(s)
+          @metadata.source = s
+        end
+
+        def author(s)
+          @metadata.author_full = s
+        end
+
+        def license(s)
+          @metadata.license = s
+        end
+
+        def summary(s)
+          @metadata.summary = s
+        end
+
+        def description(s)
+          @metadata.description = s
+        end
+
+        def project_page(s)
+          @metadata.project_page = s
         end
 
         def validate_required_fields

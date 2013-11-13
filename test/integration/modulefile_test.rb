@@ -1,11 +1,14 @@
 require 'test_helper'
 
 describe PuppetModule::Pkg::Tasks::Modulefile do
-  # todo: Modulefile not present => Errno::ENOENT, Errno::EISDIR => requires
+  # TODO: dependency management
+  #
+  # TODO: Modulefile not present => Errno::ENOENT, Errno::EISDIR => requires
   # specification of shell output format
-  # todo: incorrect format
-  # todo: unrecognized field
-  # todo: allow for single-dash commented line to be parsed (maybe,
+  #
+  # TODO: incorrect format (maybe)
+  #
+  # TODO: allow for single-dash commented line to be parsed (maybe,
   # particularly for non-forge dependencies)
 
   around do |t|
@@ -16,9 +19,16 @@ describe PuppetModule::Pkg::Tasks::Modulefile do
 
   it 'reads a Modulefile and maps its fields to an object value' do
     metadata = parser.parse 'Modulefile'
+
     metadata.name.must_equal 'testmod'
     metadata.author.must_equal 'testdev'
     metadata.version.must_equal '0.0.1'
+    metadata.source.must_equal 'https://example.com/git/testmod'
+    metadata.author_full.must_equal 'Test Developer <test@example.com>'
+    metadata.license.must_equal 'Apache License, Version 2.0'
+    metadata.summary.must_equal 'A silly module, only useful for testing'
+    metadata.description.must_equal 'A long description of this silly module'
+    metadata.project_page.must_equal 'https://example.com/testmod/home'
   end
 
   it 'raises an error if the Modulefile doesn`t contain required fields' do
@@ -31,5 +41,10 @@ describe PuppetModule::Pkg::Tasks::Modulefile do
     proc {
       parser.parse 'Modulefile.no_version'
     }.must_raise ArgumentError
+  end
+
+  it 'doesn`t complain if it finds an unsupported/unrecognized field' do
+    metadata = parser.parse 'Modulefile'
+    metadata.unsupported_field.must_be_nil
   end
 end

@@ -1,11 +1,13 @@
 name    'testdev/testmod'
 version '0.0.1'
-# source 'UNKNOWN'
-# author 'Test Developer'
-# license 'Apache License, Version 2.0'
-# summary 'UNKNOWN'
-# description 'UNKNOWN'
-# project_page 'UNKNOWN'
+source 'https://example.com/git/testmod'
+author 'Test Developer <test@example.com>'
+license 'Apache License, Version 2.0'
+summary 'A silly module, only useful for testing'
+description 'A long description of this silly module'
+project_page 'https://example.com/testmod/home'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
+
+unsupported_field 'I don`t know what I am for'
