@@ -76,19 +76,19 @@ module PuppetModule
         end
 
         def maintainer
-          "-m '#{modinfo.author_full}'"
+          optionally('-m', modinfo.author_full)
         end
 
         def url
-          "--url '#{modinfo.project_page}'"
+          optionally('--url', modinfo.project_page)
         end
 
         def description
-          "--description '#{modinfo.summary}'"
+          optionally('--description', modinfo.summary)
         end
 
         def license
-          "--license '#{modinfo.license}'"
+          optionally('--license', modinfo.license)
         end
 
         def src_fmt
@@ -111,6 +111,9 @@ module PuppetModule
           "-t #{type}"
         end
 
+        def optionally(switch, field)
+          field ? "#{switch} '#{field}'" : ""
+        end
       end
     end
   end

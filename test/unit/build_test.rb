@@ -4,6 +4,12 @@ describe 'packaging tasks' do
   let(:deb_task)    { PuppetModule::Pkg::Tasks::Deb }
   let(:rpm_task)    { PuppetModule::Pkg::Tasks::RPM }
   let(:sys)         { stub_everything }
+  let(:minimal_mod) { OpenStruct.new(
+    :name    => 'my_mod',
+    :author  => 'a_dev',
+    :version => 'some_version')
+  }
+
   let(:mod) { OpenStruct.new(
     :name    => 'my_mod',
     :author  => 'a_dev',
@@ -42,8 +48,14 @@ describe 'packaging tasks' do
   end
 
   it 'doesn`t complain if optional module info are missing' do
-    # use mod from a different, stripped-down modulefile
-    deb_task.new(sys).invoke(mod, opts)
+    sys.expects(:sh).with(Not(any_of(
+      regexp_matches(/-m /),
+      regexp_matches(/--url /),
+      regexp_matches(/--description /),
+      regexp_matches(/--license /),
+    )))
+
+    deb_task.new(sys).invoke(minimal_mod, opts)
   end
 
   describe 'deb task' do
