@@ -52,7 +52,7 @@ describe 'packaging tasks' do
       regexp_matches(/-m /),
       regexp_matches(/--url /),
       regexp_matches(/--description /),
-      regexp_matches(/--license /),
+      regexp_matches(/--license /)
     )))
 
     deb_task.new(sys).invoke(minimal_mod, opts)
