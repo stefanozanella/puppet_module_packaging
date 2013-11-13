@@ -7,8 +7,8 @@ Currently, it provides tasks to build Debian and RPM packages. To do that, it
 uses excellent Jordan Sissel's [fpm](https://github.com/jordansissel/fpm).
 
 **NOTE**: at this stage, this library lacks a bunch of useful features
-(particularly, its behavior can't be customized in any way and dependency
-management). Feel free to
+(particularly, its behavior can't be customized in any way and there's no
+dependency management). Feel free to
 submit issues or PRs if there's something that could help you out and you'd
 like to see integrated.
 
