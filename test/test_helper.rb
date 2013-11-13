@@ -64,6 +64,10 @@ def rpmbuild_found?
   return $? == 0
 end
 
+def exists?(f)
+  File.exists? f
+end
+
 def directory?(d)
   File.directory? d
 end

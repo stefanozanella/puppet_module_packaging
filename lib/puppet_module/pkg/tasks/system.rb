@@ -7,9 +7,7 @@ module PuppetModule
         end
 
         def cp(src, dest)
-          sanitized_src = src.is_a?(Range) ? src.to_a : src
-
-          FileUtils.cp_r sanitized_src, dest
+          FileUtils.cp_r only_existing_entries_of(ensure_array(src)), dest
         end
 
         def rm(path)
@@ -18,6 +16,16 @@ module PuppetModule
 
         def sh(cmd)
           `#{cmd}`
+        end
+
+        private
+
+        def ensure_array(src)
+          src.is_a?(Range) ? src.to_a : src
+        end
+
+        def only_existing_entries_of(src)
+          src.select { |f| File.exists? f }
         end
       end
     end

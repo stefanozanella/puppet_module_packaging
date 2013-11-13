@@ -38,6 +38,16 @@ describe PuppetModule::Pkg::Tasks::System do
         assert file?(join 'out', dir, "test_#{dir}"), "expected file out/#{dir}/test_#{dir} to exist"
       end
     end
+
+    it 'doesn`t complain if some directories are not found' do
+      mkdir 'directory'
+      mkdir 'out'
+
+      fs.cp(['directory', 'not', 'found'], 'out')
+
+      refute exists?(join 'out', 'not')
+      refute exists?(join 'out', 'found')
+    end
   end
 
   describe 'rm' do
