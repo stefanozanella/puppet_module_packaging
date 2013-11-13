@@ -13,7 +13,7 @@ rvm:
 bundler_args: --path vendor/bundle
 
 before_install:
-  - apt-get install rpm
+  - sudo apt-get install rpm
 
 script:
   - bundle exec rake test:all
