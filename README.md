@@ -33,9 +33,11 @@ Or install it yourself as:
 ## Usage
 
 To have the shipped Rake tasks available for your module, just add the
-following line to your `Rakefile`:
+following lines to your `Rakefile`:
 
-    require 'puppet_module_packaging/rake_task'
+    require 'puppet_module/pkg/rake_task'
+
+    PuppetModule::Pkg::Tasks.new
 
 This will add the following tasks to your set:
 
