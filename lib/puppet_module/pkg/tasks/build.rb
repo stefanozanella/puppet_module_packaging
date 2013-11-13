@@ -46,7 +46,17 @@ module PuppetModule
         attr_accessor :build_opts
 
         def fpm_opts
-          [ src_fmt, dest_fmt, name, version, arch, chdir, output ].join " "
+          [ src_fmt,
+            dest_fmt,
+            name,
+            version,
+            arch,
+            maintainer,
+            url,
+            description,
+            license,
+            chdir,
+            output ].join " "
         end
 
         def pkg_name
@@ -63,6 +73,22 @@ module PuppetModule
 
         def arch
           "-a all"
+        end
+
+        def maintainer
+          "-m '#{modinfo.author_full}'"
+        end
+
+        def url
+          "--url '#{modinfo.project_page}'"
+        end
+
+        def description
+          "--description '#{modinfo.summary}'"
+        end
+
+        def license
+          "--license '#{modinfo.license}'"
         end
 
         def src_fmt
