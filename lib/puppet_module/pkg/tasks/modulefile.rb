@@ -13,6 +13,7 @@ module PuppetModule
         def initialize(str)
           @metadata = OpenStruct.new
           binding.eval str
+          validate_required_fields
         end
 
         private
@@ -23,6 +24,14 @@ module PuppetModule
 
         def version(s)
           @metadata.version = s
+        end
+
+        def validate_required_fields
+          raise ArgumentError, 'Modulefile doesn`t contain name or author' unless
+            @metadata.name and @metadata.author
+
+          raise ArgumentError, 'Modulefile doesn`t contain version information' unless
+            @metadata.version
         end
       end
     end
