@@ -1,5 +1,7 @@
 # Puppet Module Packaging
 
+[![Build Status](https://travis-ci.org/stefanozanella/puppet_module_packaging.png?branch=master)](https://travis-ci.org/stefanozanella/puppet_module_packaging)
+
 Provides Rake tasks to ease shipping of Puppet modules as proper system
 packages.
 
