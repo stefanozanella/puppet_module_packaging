@@ -1,7 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.unshift(lib) unless $:.include?(lib)
+
+require 'pathname'
 require 'puppet_module/pkg/version'
+
+signing_key_file = ENV['RUBYGEMS_SIGNING_KEY_FILE']
 
 Gem::Specification.new do |spec|
   spec.name          = "puppetmodule-pkg-tasks"
@@ -30,4 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest-filesystem"
   spec.add_development_dependency "minitest-around"
   spec.add_development_dependency "mocha"
+
+  spec.signing_key = Pathname.new(signing_key_file).expand_path if signing_key_file
+  spec.cert_chain = ["rubygems-stefanozanella.crt"]
 end

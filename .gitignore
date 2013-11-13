@@ -1,9 +1,12 @@
 *.swp
 *.swo
 .bundle
+.envrc
 .vagrant
 Gemfile.lock
 vendor
+#! IMPORTANT as we don't want to commit things built by tests (esp. packages)
 **/pkg
 !lib/**/pkg
 test/fixture/**/build
+#! IMPORTANT
