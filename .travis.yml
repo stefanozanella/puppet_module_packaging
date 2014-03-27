@@ -8,6 +8,8 @@ rvm:
   - jruby-19mode
   - rbx
 
+cache: apt
+
 bundler_args: --path vendor/bundle
 
 before_install:

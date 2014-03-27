@@ -1,4 +1,5 @@
 $deps = [
+  'ruby-dev',
   'libxml2',
   'libxml2-dev',
   'libxslt1.1',
