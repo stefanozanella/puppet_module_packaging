@@ -5,7 +5,6 @@ describe 'using PuppetModule::Pkg::Tasks in a Rakefile' do
     do_into_tmp_module('testmod', t)
   end
 
-  let(:fixture_module) { File.join(fixture_dir, 'testmod') }
   let(:task_list) { `rake -T` }
 
   [:install, :clean, :deb, :rpm].each do |task|
