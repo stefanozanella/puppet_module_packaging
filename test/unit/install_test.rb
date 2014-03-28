@@ -23,6 +23,7 @@ describe PuppetModule::Pkg::Tasks::Install do
   it 'installs all the relevant directories into the output folder' do
     sys.expects(:cp).with(
       includes(
+        'Modulefile',
         'manifests',
         'templates',
         'files',

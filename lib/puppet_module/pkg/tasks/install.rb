@@ -25,7 +25,7 @@ module PuppetModule
         end
 
         def assets_to_install
-          ['manifests','templates','lib','files']
+          ['Modulefile','manifests','templates','lib','files']
         end
       end
     end
