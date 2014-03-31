@@ -1,4 +1,4 @@
-name    'testdev/testmod'
+name    'testdev-testmod'
 version '0.0.1'
 source 'https://example.com/git/testmod'
 author 'Test Developer <test@example.com>'
