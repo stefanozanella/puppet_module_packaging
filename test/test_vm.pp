@@ -22,3 +22,8 @@ package { 'bundler':
 exec { 'apt-get update':
   path => '/usr/bin',
 }
+
+user { 'vagrant':
+  ensure => present,
+  shell  => '/bin/bash',
+}
