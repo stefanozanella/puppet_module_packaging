@@ -12,6 +12,7 @@ module PuppetModule
 
         def initialize(str)
           @metadata = OpenStruct.new
+          @metadata.dependencies = []
           binding.eval str
           validate_required_fields
         end
@@ -54,6 +55,26 @@ module PuppetModule
 
         def project_page(s)
           @metadata.project_page = s
+        end
+
+        def dependency(mod, ver)
+          a, n = mod.split('/')
+          @metadata.dependencies << {
+            :name => n,
+            :author => a,
+            :versions => dependency_versions_for(ver),
+          }
+        end
+
+        def dependency_versions_for(versions_str)
+          versions = []
+          versions_str.split(/(>=|<=|==|=|<|>)\s+/)\
+            .select { |s| !s.empty? }\
+            .each_slice(2) { |v|
+              versions << v.map { |s| s.strip }.join(" ")
+            }
+
+          versions
         end
 
         def validate_required_fields

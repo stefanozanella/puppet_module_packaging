@@ -17,7 +17,11 @@ describe 'packaging tasks' do
     :author_full => 'a_dev <a@dev.com>',
     :project_page => 'http://a.b.c/my_mod',
     :summary => 'nothing fancy',
-    :license => 'whatever')
+    :license => 'whatever',
+    :dependencies => [
+      { :author => 'user_1', :name => 'mod_1', :versions => ['< 1'] },
+      { :author => 'user_2', :name => 'mod_2', :versions => ['> 2.0', '<= 3.0'] },
+    ])
   }
   let(:opts) { OpenStruct.new(
     :pkg_dir     => 'pkg',
@@ -38,6 +42,9 @@ describe 'packaging tasks' do
       regexp_matches(/-n puppet-mod-#{mod.author}-#{mod.name}/),
       regexp_matches(/-v #{mod.version}/),
       regexp_matches(/-m '#{mod.author_full}'/),
+      regexp_matches(/-d 'puppet-mod-user_1-mod_1 < 1'/),
+      regexp_matches(/-d 'puppet-mod-user_2-mod_2 > 2.0'/),
+      regexp_matches(/-d 'puppet-mod-user_2-mod_2 <= 3.0'/),
       regexp_matches(/--url '#{mod.project_page}'/),
       regexp_matches(/--description '#{mod.summary}'/),
       regexp_matches(/--license '#{mod.license}'/),

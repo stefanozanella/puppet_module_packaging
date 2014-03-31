@@ -55,6 +55,7 @@ module PuppetModule
             url,
             description,
             license,
+            dependencies,
             chdir,
             output ].join " "
         end
@@ -89,6 +90,16 @@ module PuppetModule
 
         def license
           optionally('--license', modinfo.license)
+        end
+
+        def dependencies
+          return "" unless modinfo.dependencies
+
+          modinfo.dependencies.map do |dep|
+            dep[:versions].map do |version_constraint|
+              "-d 'puppet-mod-#{dep[:author]}-#{dep[:name]} #{version_constraint}'"
+            end
+          end
         end
 
         def src_fmt

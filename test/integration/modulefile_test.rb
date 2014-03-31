@@ -29,6 +29,10 @@ describe PuppetModule::Pkg::Tasks::Modulefile do
     metadata.summary.must_equal 'A silly module, only useful for testing'
     metadata.description.must_equal 'A long description of this silly module'
     metadata.project_page.must_equal 'https://example.com/testmod/home'
+    metadata.dependencies.must_equal [
+      { :author => 'user_1', :name => 'mod_1', :versions => ['= 1.2.3'] },
+      { :author => 'user_2', :name => 'mod_2', :versions => ['>= 1.0.0', '< 3.2']},
+    ]
   end
 
   it 'raises an error if the Modulefile doesn`t contain required fields' do
