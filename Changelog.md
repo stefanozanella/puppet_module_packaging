@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0
+
+* Fix a shadowed variable bug in the test suite that prevented it to work
+  correctly.
+* Added the Modulefile to the list of installed files in the final package
+* Fixed parsing of `name-author` string in Modulefile
+* Added support for translation of dependencies from Modulefile to final package
+* Minor refactoring
+
 ## 0.0.2
 
 * Fix a bug that let the tasks fail if not all the standard module directories
