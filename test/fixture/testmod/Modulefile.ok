@@ -1,0 +1,13 @@
+name    'testdev-testmod'
+version '0.0.1'
+source 'https://example.com/git/testmod'
+author 'Test Developer <test@example.com>'
+license 'Apache License, Version 2.0'
+summary 'A silly module, only useful for testing'
+description 'A long description of this silly module'
+project_page 'https://example.com/testmod/home'
+
+dependency 'user_1/mod_1', '= 1.2.3'
+dependency 'user_2/mod_2', '>= 1.0.0 <3.2'
+
+unsupported_field 'I don`t know what I am for'

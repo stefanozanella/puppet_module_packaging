@@ -16,7 +16,7 @@ describe PuppetModule::Pkg::Tasks::Modulefile do
   let(:parser) { PuppetModule::Pkg::Tasks::Modulefile }
 
   it 'reads a Modulefile and maps its fields to an object value' do
-    metadata = parser.parse 'Modulefile'
+    metadata = parser.parse 'Modulefile.ok'
 
     metadata.name.must_equal 'testmod'
     metadata.author.must_equal 'testdev'
