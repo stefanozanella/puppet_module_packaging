@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+* Fix a bug in the Modulefile parser that prevented correct dependency
+  detection when no space between constraint qualifier and actual version was
+  provided.
+
 ## 0.1.0
 
 * Fix a shadowed variable bug in the test suite that prevented it to work
