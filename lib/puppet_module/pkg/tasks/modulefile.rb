@@ -68,7 +68,7 @@ module PuppetModule
 
         def dependency_versions_for(versions_str)
           versions = []
-          versions_str.split(/(>=|<=|==|=|<|>)\s+/)\
+          versions_str.split(/(>=|<=|==|=|<|>)\s*/)\
             .select { |s| !s.empty? }\
             .each_slice(2) { |v|
               versions << v.map { |s| s.strip }.join(" ")

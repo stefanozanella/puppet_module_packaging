@@ -1,8 +1,6 @@
 require 'test_helper'
 
 describe PuppetModule::Pkg::Tasks::Modulefile do
-  # TODO: dependency management
-  #
   # TODO: Modulefile not present => Errno::ENOENT, Errno::EISDIR => requires
   # specification of shell output format
   #
