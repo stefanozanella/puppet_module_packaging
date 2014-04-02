@@ -15,7 +15,12 @@ module PuppetModule
         end
 
         def sh(cmd)
-          `#{cmd}`
+          # TODO: This should be supported through an external logger!
+          puts `#{cmd}`
+        end
+
+        def ls(path)
+          Dir.new(path).entries.reject { |d| d =~ /^\.*$/ }
         end
 
         private

@@ -59,11 +59,27 @@ describe PuppetModule::Pkg::Tasks::System do
     end
   end
 
-  describe 'exec' do
+  describe 'sh' do
     it 'executes given command in system`s shell' do
       fs.sh 'touch test_file'
 
       assert file?('test_file'), "expected file test_file to have been created, but it was not"
+    end
+  end
+
+  describe 'ls' do
+    it 'returns an array with the entries of a specific folder' do
+      mkdir 'a_dir/a'
+      mkdir 'a_dir/b'
+      mkdir 'a_dir/c'
+      mkdir 'a_dir/c/d'
+
+      listing = fs.ls 'a_dir'
+
+      listing.length.must_equal 3
+      listing.must_include 'a'
+      listing.must_include 'b'
+      listing.must_include 'c'
     end
   end
 end

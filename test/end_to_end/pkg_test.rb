@@ -5,13 +5,29 @@ describe 'deb task' do
     do_into_tmp_module('testmod', t)
   end
 
-  describe 'by default' do
-    let(:pkg) { 'pkg/puppet-mod-testdev-testmod_0.0.1_all.deb' }
+  let(:pkg) { 'pkg/puppet-mod-testdev-testmod_0.0.1_all.deb' }
 
+  describe 'by default' do
     it 'build a package into the `pkg` folder' do
       `rake deb`
 
       assert file?(pkg), "expected package #{pkg} to exist"
+    end
+  end
+
+  describe 'when asked to build packages for dependencies as well' do
+    let(:dep_pkgs) {[
+      'pkg/puppet-mod-puppetlabs-apache_*_all.deb',
+      'pkg/puppet-mod-puppetlabs-stdlib_*_all.deb',
+      'pkg/puppet-mod-puppetlabs-concat_*_all.deb',
+    ]}
+
+    it 'recursively builds packages for each dependency' do
+      `rake -f Rakefile.recursive deb`
+
+      dep_pkgs.each do |dep_pkg|
+        refute Dir.glob(dep_pkg).empty?, "expected package #{dep_pkg} to exist"
+      end
     end
   end
 end

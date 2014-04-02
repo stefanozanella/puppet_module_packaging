@@ -49,4 +49,11 @@ describe PuppetModule::Pkg::Tasks::Modulefile do
     metadata = parser.parse 'Modulefile'
     metadata.unsupported_field.must_be_nil
   end
+
+  it 'also supports name in the old `author/name` format' do
+    metadata = parser.parse 'Modulefile.deprecated'
+    metadata.name.must_equal 'oldmod'
+    metadata.author.must_equal 'olddev'
+    metadata.version.must_equal 'deprecated_version'
+  end
 end

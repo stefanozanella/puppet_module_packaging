@@ -7,7 +7,6 @@ summary 'A silly module, only useful for testing'
 description 'A long description of this silly module'
 project_page 'https://example.com/testmod/home'
 
-dependency 'user_1/mod_1', '= 1.2.3'
-dependency 'user_2/mod_2', '>= 1.0.0 <3.2'
+dependency 'puppetlabs/apache', '1.0.1'
 
 unsupported_field 'I don`t know what I am for'

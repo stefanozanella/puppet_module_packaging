@@ -1,3 +1,5 @@
+require 'puppet_module/pkg/tasks/packager'
+
 class Class
   def type(sym)
     self.class_eval <<-EOS
@@ -20,8 +22,9 @@ module PuppetModule
   module Pkg
     class Tasks
       class Build
-        def initialize(system)
+        def initialize(system, mod_finder)
           @sys = system
+          @mod_finder = mod_finder
         end
 
         def invoke(mod, opts)
@@ -29,7 +32,12 @@ module PuppetModule
           self.build_opts = opts
 
           @sys.mkdir opts.pkg_dir
-          @sys.sh("fpm #{fpm_opts} #{installed_files}")
+          @packager = Packager.new(@sys)
+          @packager.package(mod, opts.install_dir, opts.pkg_dir, type, filename)
+
+          @mod_finder.find_in(opts.dep_install_path).each do |dep|
+            @packager.package(dep, File.join(opts.dep_build_path, dep.name), opts.pkg_dir, type, filename_for(dep.name, dep.author))
+          end
         end
 
         def type
@@ -45,85 +53,8 @@ module PuppetModule
         attr_accessor :modinfo
         attr_accessor :build_opts
 
-        def fpm_opts
-          [ src_fmt,
-            dest_fmt,
-            name,
-            version,
-            arch,
-            maintainer,
-            url,
-            description,
-            license,
-            dependencies,
-            chdir,
-            output ].join " "
-        end
-
-        def pkg_name
-          "puppet-mod-#{modinfo.author}-#{modinfo.name}"
-        end
-
-        def name
-          "-n #{pkg_name}"
-        end
-
-        def version
-          "-v #{modinfo.version}"
-        end
-
-        def arch
-          "-a all"
-        end
-
-        def maintainer
-          optionally('-m', modinfo.author_full)
-        end
-
-        def url
-          optionally('--url', modinfo.project_page)
-        end
-
-        def description
-          optionally('--description', modinfo.summary)
-        end
-
-        def license
-          optionally('--license', modinfo.license)
-        end
-
-        def dependencies
-          return "" unless modinfo.dependencies
-
-          modinfo.dependencies.map do |dep|
-            dep[:versions].map do |version_constraint|
-              "-d 'puppet-mod-#{dep[:author]}-#{dep[:name]} #{version_constraint}'"
-            end
-          end
-        end
-
-        def src_fmt
-          "-s dir"
-        end
-
-        def chdir
-          "-C #{build_opts.install_dir}"
-        end
-
-        def installed_files
-          "."
-        end
-
-        def output
-          "-p #{build_opts.pkg_dir}/#{filename}"
-        end
-
-        def dest_fmt
-          "-t #{type}"
-        end
-
-        def optionally(switch, field)
-          field ? "#{switch} '#{field}'" : ""
+        def pkg_name(mod = modinfo.name, author = modinfo.author)
+          "puppet-mod-#{author}-#{mod}"
         end
       end
     end

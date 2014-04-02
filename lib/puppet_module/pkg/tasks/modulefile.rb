@@ -26,7 +26,7 @@ module PuppetModule
         private
 
         def name(s)
-          @metadata.author, @metadata.name = s.split '-'
+          @metadata.author, @metadata.name = s.split %r{[-/]}
         end
 
         def version(s)
