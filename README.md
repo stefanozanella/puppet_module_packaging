@@ -60,6 +60,24 @@ optional and are mapped into package fields with equivalent meaning.
 **NOTE**: The module will be installed under `/usr/share/puppet/modules`, not
 into `/etc/puppet`!
 
+### Recursive packaging
+
+The library can also take care of packaging the whole dependency tree of a
+module as well, so that you don't need to manually track and package
+dependencies. To enable this feature, just specify the `:recursive` option when
+declaring the tasks:
+
+    require 'puppet_module/pkg/rake_task'
+
+    PuppetModule::Pkg::Tasks.new :recursive => true
+
+This way, the library will take care of downloading the module's dependencies,
+installing their relevant assets into a separate folder and packaging them into
+individual packages.
+
+Note that, as of now, **only dependencies downloadable from Puppet Forge are
+supported**.
+
 ## Compatibility
 
 OS compatibility resembles the one of FPM; in particular:

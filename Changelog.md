@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+* Introduce :recursive option, which performs recursive dependency packaging if
+  enabled.
+
 ## 0.1.1
 
 * Fix a bug in the Modulefile parser that prevented correct dependency
